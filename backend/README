@@ -1,0 +1,10 @@
+To run this:
+
+make sure you have pipenv and FastAPI installed
+`pip install pipenv`
+`pip install fastapi`
+
+Once they are installed, from this folder run
+`pipenv shell`
+`pipenv install -r requirements.txt`
+`uvicorn main:app --reload`
