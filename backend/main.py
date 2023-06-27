@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 #For the ingredients 
-from model import Ingredient
+from model import Ingredient, TodoItem
 
 #create appp
 app = FastAPI()
@@ -40,6 +40,27 @@ def delete_ingredient(ingredient_id: int):
     ingredients.pop(ingredient_id)
     return {}
 
-# @app.get("/")
-# def read_root():
-#     return {"Ping": "Pong"}
+#todo list
+todos = {
+    1: {"task": "Learn Python", "complete": False},
+    2: {"task": "Learn FastAPI", "complete": False},
+}
+
+@app.get("/todos")
+def get_todos():
+    return todos
+
+@app.post("/todos")
+def add_todo(todo: TodoItem):
+    todos[len(todos) + 1] = todo
+    return todo
+
+@app.delete("/todos/{todo_id}")
+def delete_ingredient(todo_id: int):
+    todos.pop(todo_id)
+    return {}
+
+@app.put("/todos/{todo_id}")
+def update_ingredient(todo_id: int, todo: TodoItem):
+    todos[todo_id] = todo
+    return todo
