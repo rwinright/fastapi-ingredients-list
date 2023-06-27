@@ -15,6 +15,7 @@ const Todos = () => {
     const [todoMenuOpen, setTodoMenuOpen] = useState(false)
 
     const fetchTodos = async () => {
+        setLoading(true)
         try {
             const data = await axios.get('http://127.0.0.1:8000/todos')
             const todosArray = Object.keys(data.data).map(key => {
@@ -33,10 +34,13 @@ const Todos = () => {
     }
 
     const handleDelete = async (id) => {
+        setLoading(true)
         try {
             await axios.delete(`http://127.0.0.1:8000/todos/${id}`)
             fetchTodos()
+            setLoading(false)
         } catch (error) {
+            setLoading(false)
             console.log(error)
         }
     }
@@ -46,7 +50,7 @@ const Todos = () => {
         const handleAdd = async (task) => {
             console.log(task)
             //Set the task id to the length of the todos array + 1
-            task.id = todos.length + 1
+            task.id = String(todos.length + 1)
             try {
                 await axios.post(`http://127.0.0.1:8000/todos`, task)
                 fetchTodos()
@@ -55,125 +59,7 @@ const Todos = () => {
                 console.log(error)
                 setTodoMenuOpen(false)
             }
-        }
-
-        const seedTodos = async () => {
-            const todos = [
-                {
-                    "id": 1,
-                    "task": "Do the dishes",
-                    "complete": false
-                },
-                {
-                    "id": 2,
-                    "task": "Buy groceries",
-                    "complete": false
-                },
-                {
-                    "id": 3,
-                    "task": "Take out the trash",
-                    "complete": false
-                },
-                {
-                    "id": 4,
-                    "task": "Call mom",
-                    "complete": false
-                },
-                {
-                    "id": 5,
-                    "task": "Pay bills",
-                    "complete": false
-                },
-                {
-                    "id": 6,
-                    "task": "Go for a run",
-                    "complete": false
-                },
-                {
-                    "id": 7,
-                    "task": "Read a book",
-                    "complete": false
-                },
-                {
-                    "id": 8,
-                    "task": "Write a report",
-                    "complete": false
-                },
-                {
-                    "id": 9,
-                    "task": "Attend a meeting",
-                    "complete": false
-                },
-                {
-                    "id": 10,
-                    "task": "Fix the broken faucet",
-                    "complete": false
-                },
-                {
-                    "id": 11,
-                    "task": "Organize the closet",
-                    "complete": false
-                },
-                {
-                    "id": 12,
-                    "task": "Study for the exam",
-                    "complete": false
-                },
-                {
-                    "id": 13,
-                    "task": "Water the plants",
-                    "complete": false
-                },
-                {
-                    "id": 14,
-                    "task": "Clean the car",
-                    "complete": false
-                },
-                {
-                    "id": 15,
-                    "task": "Finish the presentation",
-                    "complete": false
-                },
-                {
-                    "id": 16,
-                    "task": "Schedule a doctor's appointment",
-                    "complete": false
-                },
-                {
-                    "id": 17,
-                    "task": "Start a new project",
-                    "complete": false
-                },
-                {
-                    "id": 18,
-                    "task": "Learn a new language",
-                    "complete": false
-                },
-                {
-                    "id": 19,
-                    "task": "Visit a museum",
-                    "complete": false
-                },
-                {
-                    "id": 20,
-                    "task": "Cook a new recipe",
-                    "complete": false
-                },
-                {
-                    "id": 21,
-                    "task": "Practice meditation",
-                    "complete": false
-                }
-            ]
-            
-            todos.forEach(async (todo) => {
-                await axios.post(`http://127.0.0.1:8000/todos`, todo)
-            })
-        }
-            
-            
-            
-
+        }      
 
         const [task, setTask] = useState({
             id: 0,
@@ -187,7 +73,6 @@ const Todos = () => {
             </div>
             <div className="add-todo-buttons">
                 <AddButton cb={() => handleAdd(task)} disabled={!task.task} />
-                <button onClick={() => seedTodos()}>Seed</button>
                 <button onClick={() => setTodoMenuOpen(!todoMenuOpen)}>Cancel</button>
             </div>
         </div>
