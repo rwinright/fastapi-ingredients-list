@@ -1,0 +1,81 @@
+.NavBar{
+    background-color: $brown;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    //Make it stick to top
+    position: sticky;
+    top: 0;
+
+    .title{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .hamburger-menu{
+        margin-left: 20px;
+        margin-right: 20px;
+        cursor: pointer;
+        .line{
+            width: 30px;
+            height: 3px;
+            background-color: $yellow;
+            margin: 5px;
+        }
+        //Slide left animation
+        &.slide-left{
+            .line{
+                &:nth-child(1){
+                    transform: rotate(45deg) translate(5px, 5px);
+                }
+                &:nth-child(2){
+                    opacity: 0;
+                }
+                &:nth-child(3){
+                    transform: rotate(-45deg) translate(7px, -8px);
+                }
+            }
+        }
+        //Slide right animation
+        &.slide-right{
+            .line{
+                &:nth-child(1){
+                    transform: rotate(0deg) translate(0px, 0px);
+                }
+                &:nth-child(2){
+                    opacity: 1;
+                }
+                &:nth-child(3){
+                    transform: rotate(0deg) translate(0px, 0px);
+                }
+            }
+        }
+
+    }
+    .nav-links{
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background-color: $brown;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+
+        .nav-link{
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-decoration: none;
+            color: $yellow;
+            transition: color 0.5s ease-in-out;
+
+            &:hover{
+                color: $dark-green;
+            }
+        }
+    }
+}

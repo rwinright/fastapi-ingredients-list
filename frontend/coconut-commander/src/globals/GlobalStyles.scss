@@ -1,0 +1,21 @@
+//Color variables
+$brown: #483838;
+$dark-green: #42855B;
+$yellow-green: #90B77D;
+$yellow: #D2D79F;
+
+button{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: $yellow;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: $dark-green;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        color: $dark-green;
+    }
+}

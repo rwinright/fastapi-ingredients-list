@@ -1,0 +1,52 @@
+//Global styles
+@import "./globals/GlobalStyles.scss";
+
+//Views
+@import "./views/home/Home.scss";
+@import "./views/food/Food.scss";
+@import "./views/todos/Todos.scss";
+
+//Shared
+@import "./views/shared_components/nav/NavBar.scss";
+
+//Default styles for the app
+
+body{
+    background-color: $yellow-green;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    color: $yellow;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    @media (min-width: 768px) {
+        font-size: 18px;
+    }
+
+    //Reset default link styles
+    a{
+        text-decoration: none;
+        color: $yellow;
+        transition: color 0.5s ease-in-out;
+
+        &:hover{
+            color: $dark-green;
+        }
+    }
+}
+
+//Make sure default browser styles are reset
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
